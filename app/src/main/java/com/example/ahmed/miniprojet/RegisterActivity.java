@@ -17,7 +17,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText ednom,edprenom,edmail,edlogin,edphone,edpass;
+    EditText ednom,edprenom,edmail,edlogin,edphone,edpass,edpassagain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,11 +28,19 @@ public class RegisterActivity extends AppCompatActivity {
         edlogin=(EditText) findViewById(R.id.edlogin1);
         edphone=(EditText) findViewById(R.id.edphone);
         edpass=(EditText) findViewById(R.id.edpass);
+        edpassagain=(EditText) findViewById(R.id.edpassagain);
     }
     public void inscrit(View view) {
+        String url="";
+        String strPass1 = edpass.getText().toString();
+        String strPass2 = edpassagain.getText().toString();
+        if (strPass1.equals(strPass2)) {
+            url ="http://172.16.27.69/coiv/inscript.php?nom="+ednom.getText().toString()+"&prenom="+edprenom.getText().toString()+
+                    "&login="+edlogin.getText().toString()+"&phone="+edphone.getText().toString()+"&password="+edpass.getText().toString();
+        } else {
+           Toast.makeText(getApplicationContext(),"passwords not equals",Toast.LENGTH_SHORT).show();
+        }
 
-        String url="http://172.16.27.69/coiv/inscript.php?nom="+ednom.getText().toString()+"&prenom="+edprenom.getText().toString()+
-                "&login="+edlogin.getText().toString()+"&phone="+edphone.getText().toString()+"&password="+edpass.getText().toString();
         new MyAsyncTaskgetNews().execute(url);
     }
     public class MyAsyncTaskgetNews extends AsyncTask<String, String, String> {

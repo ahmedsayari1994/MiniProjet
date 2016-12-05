@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="waslni.android.com.wasslnitn.login">
+   >
 
     <EditText
         android:layout_width="wrap_content"
@@ -50,15 +50,14 @@
         android:onClick="bulogin" />
 
     <TextView
-        android:text="registre"
-        android:layout_width="wrap_content"
+        android:text="créer un compte"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tvregistre"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/button2"
-        android:layout_toRightOf="@+id/edpassword1"
-        android:layout_toEndOf="@+id/edpassword1"
-        android:layout_marginLeft="22dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="15dp" />
+        android:layout_toEndOf="@+id/button2"
+        android:layout_toRightOf="@+id/button2" />
 
 </RelativeLayout>
