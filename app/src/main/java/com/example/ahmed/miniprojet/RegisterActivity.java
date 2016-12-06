@@ -86,10 +86,22 @@ public class RegisterActivity extends AppCompatActivity {
             return null;
         }
         protected void onProgressUpdate(String... progress) {
-
+            String ch ="user is added";
             try {
                 JSONObject json=new JSONObject(progress[0]);
-                Toast.makeText(getApplicationContext(),json.getString("msg"),Toast.LENGTH_LONG).show();
+                String msg =json.getString("msg");
+                Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
+                if(ch.equals(ch)){
+                    Intent i=new Intent(RegisterActivity.this,LoginActivity.class);
+                    ednom.getText().clear();
+                            edprenom.getText().clear();
+                    edmail.getText().clear();
+                    edlogin.getText().clear();
+
+                    edphone.getText().clear();edpass.getText().clear();
+                    edpassagain.getText().clear();
+                    startActivity(i);
+                }
 
             } catch (Exception ex) {
             }
