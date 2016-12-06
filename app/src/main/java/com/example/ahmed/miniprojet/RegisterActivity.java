@@ -1,5 +1,6 @@
 package com.example.ahmed.miniprojet;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,12 +38,21 @@ public class RegisterActivity extends AppCompatActivity {
         if (strPass1.equals(strPass2)) {
             url ="http://172.16.27.69/coiv/inscript.php?nom="+ednom.getText().toString()+"&prenom="+edprenom.getText().toString()+
                     "&login="+edlogin.getText().toString()+"&phone="+edphone.getText().toString()+"&password="+edpass.getText().toString();
+            Intent i= new Intent(this,ProposerTrajet.class);
+            startActivity(i);
         } else {
            Toast.makeText(getApplicationContext(),"passwords not equals",Toast.LENGTH_SHORT).show();
         }
 
         new MyAsyncTaskgetNews().execute(url);
+
     }
+
+    public void annulerInsc(View view) {
+        Intent i= new Intent(this,LoginActivity.class);
+        startActivity(i);
+    }
+
     public class MyAsyncTaskgetNews extends AsyncTask<String, String, String> {
         @Override
         protected void onPreExecute() {

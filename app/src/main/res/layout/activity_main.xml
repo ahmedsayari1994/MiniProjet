@@ -8,7 +8,6 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/route"
     tools:context="com.example.ahmed.miniprojet.MainActivity">
 
     <Button
@@ -24,7 +23,51 @@
         android:layout_alignStart="@+id/btnrechtrajet"
         android:layout_alignRight="@+id/btnrechtrajet"
         android:layout_alignEnd="@+id/btnrechtrajet"
-        android:onClick="propsertrajet" />
+         />
+
+    <Button
+        android:text="Proposer Un Trajet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        android:layout_marginBottom="35dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:layout_above="@+id/btnrechtrajet"
+        android:layout_alignLeft="@+id/btnrechtrajet"
+        android:layout_alignStart="@+id/btnrechtrajet"
+        android:layout_alignRight="@+id/btnrechtrajet"
+        android:layout_alignEnd="@+id/btnrechtrajet" />
+
+    <Button
+        android:text="Proposer Un Trajet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:layout_marginBottom="35dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:layout_above="@+id/btnrechtrajet"
+        android:layout_alignLeft="@+id/btnrechtrajet"
+        android:layout_alignStart="@+id/btnrechtrajet"
+        android:layout_alignRight="@+id/btnrechtrajet"
+        android:layout_alignEnd="@+id/btnrechtrajet"
+        android:onClick="proposertrajet" />
+
+    <Button
+        android:text="Proposer Un Trajet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button3"
+        android:layout_marginBottom="35dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:layout_above="@+id/btnrechtrajet"
+        android:layout_alignLeft="@+id/btnrechtrajet"
+        android:layout_alignStart="@+id/btnrechtrajet"
+        android:layout_alignRight="@+id/btnrechtrajet"
+        android:layout_alignEnd="@+id/btnrechtrajet"
+        android:onClick="proposertrajet" />
 
     <Button
         android:layout_width="wrap_content"

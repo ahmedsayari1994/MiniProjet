@@ -83,7 +83,8 @@
         android:layout_alignLeft="@+id/textView"
         android:background="@color/colorPrimary"
         android:textColor="@android:color/white"
-        android:layout_alignStart="@+id/textView" />
+        android:layout_alignStart="@+id/textView"
+        android:onClick="annulerTrajet" />
 
     <Button
         android:text="Valider"
