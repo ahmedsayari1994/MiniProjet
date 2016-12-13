@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">NetWensou</string>
     <string name="facebook_app_id">1853293764908462</string>
+    <string name="server_client_id">247853820261-ov5i9hob1482tbmm1qnsqdv9nmb1lhr6.apps.googleusercontent.com</string>
+    <!-- Button labels -->
+    <string name="sign_out">Sign Out</string>a
+    <string name="disconnect">Disconnect</string>
+    <string name="signed_in_fmt">Signed in as: %s</string>
 </resources>

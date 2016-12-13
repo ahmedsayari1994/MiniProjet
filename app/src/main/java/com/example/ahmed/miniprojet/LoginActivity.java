@@ -14,9 +14,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -27,6 +30,12 @@ import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,7 +49,7 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity  implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
     TextView tx; String text,text1="";
     EditText ed1,ed2;
     Button btn;
@@ -48,6 +57,11 @@ public class LoginActivity extends AppCompatActivity {
     private String facebook_id,f_name, m_name, l_name, gender, profile_image, full_name, email_id;
 
     CallbackManager callbackManager;
+
+    ImageView imgProfilePic;
+    TextView tv_username,txtEmail;
+    GoogleApiClient mGoogleApiClient;
+    private static final int RC_SIGN_IN = 9001;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -61,6 +75,18 @@ public class LoginActivity extends AppCompatActivity {
         ed2=(EditText) findViewById(R.id.edpassword1);
         login = (LoginButton)findViewById(R.id.login_button);
         login.setReadPermissions("public_profile email");
+        //google//////////////////////////////////////////
+        findViewById(R.id.sign_in_button).setOnClickListener(this);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+        ///////////////////////////////////////////
         getKeyHash();
         login.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -118,6 +144,61 @@ public class LoginActivity extends AppCompatActivity {
         String url="http://172.16.27.69/coiv/login.php/?login="+ed1.getText().toString()+"&password="+ed2.getText().toString();
         new MyAsyncTaskgetNews().execute(url);
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.sign_in_button:
+
+                signIn();
+
+                break;
+        /*    case R.id.btn_logout:
+
+                signOut();
+
+                break;*/
+        }
+    }
+
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+    private void signIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+
+    private void handleSignInResult(GoogleSignInResult result) {
+
+        if (result.isSuccess()) {
+            // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+        /*    tv_username.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
+            String personPhotoUrl = acct.getPhotoUrl().toString();
+            String email = acct.getEmail();
+            txtEmail.setText(getString(R.string.signed_in_fmt,email));
+            Glide.with(getApplicationContext()).load(personPhotoUrl)
+                    .thumbnail(0.5f)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imgProfilePic);
+*/
+              System.out.println("email"+acct.getEmail());
+            System.out.println(acct.getDisplayName());
+            Intent i =new Intent(LoginActivity.this,MainActivity.class);
+            Toast.makeText(getApplicationContext(),acct.getDisplayName(),Toast.LENGTH_SHORT).show();
+            startActivity(i);
+
+
+        } else {
+            // Signed out, show unauthenticated UI.
+            // updateUI(false);
+        }
     }
 
 
@@ -250,9 +331,15 @@ public class LoginActivity extends AppCompatActivity {
         request.setParameters(parameters);
         request.executeAsync();
     }
-    @Override
+  @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+
+      if (requestCode == RC_SIGN_IN) {
+          GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+          handleSignInResult(result);
+      }else
+          callbackManager.onActivityResult(requestCode, resultCode, data);
+
     }
 }
