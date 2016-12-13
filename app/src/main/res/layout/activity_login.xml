@@ -35,7 +35,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ProjetIcone"
+        app:srcCompat="@drawable/projet"
         android:id="@+id/imageView2"
         android:layout_above="@+id/edlogin1" />
 
@@ -62,5 +62,15 @@
         android:layout_below="@+id/edpassword1"
         android:layout_alignRight="@+id/edpassword1"
         android:layout_alignEnd="@+id/edpassword1" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_below="@+id/tvregistre"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="26dp" />
 
 </RelativeLayout>
