@@ -36,10 +36,12 @@ public class RegisterActivity extends AppCompatActivity {
         String strPass1 = edpass.getText().toString();
         String strPass2 = edpassagain.getText().toString();
         if (strPass1.equals(strPass2)) {
-            url ="http://172.16.27.69/coiv/inscript.php?nom="+ednom.getText().toString()+"&prenom="+edprenom.getText().toString()+
+            url ="http://anproip.esy.es/inscript.php?nom="+ednom.getText().toString()+"&prenom="+edprenom.getText().toString()+
                     "&login="+edlogin.getText().toString()+"&phone="+edphone.getText().toString()+"&password="+edpass.getText().toString();
-            Intent i= new Intent(this,ProposerTrajet.class);
-            startActivity(i);
+        //"http://anproip.esy.es/inscript.php?nom=tt&prenom=yy&login=t&phone=44&password=dd
+
+          /* Intent i= new Intent(this,ProposerTrajet.class);
+            startActivity(i);*/
         } else {
            Toast.makeText(getApplicationContext(),"passwords not equals",Toast.LENGTH_SHORT).show();
         }

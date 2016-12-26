@@ -141,7 +141,7 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
     }
 
     public void bulogin(View view) {
-        String url="http://172.16.27.69/coiv/login.php/?login="+ed1.getText().toString()+"&password="+ed2.getText().toString();
+        String url="http://anproip.esy.es/login.php/?login="+ed1.getText().toString()+"&password="+ed2.getText().toString();
         new MyAsyncTaskgetNews().execute(url);
 
     }
@@ -238,12 +238,13 @@ public class LoginActivity extends AppCompatActivity  implements View.OnClickLis
 
             try {
                 JSONObject json=new JSONObject(progress[0]);
-                if (json.getString("msg").equals("true")){
+                if (json.getString("msg").equals("connecte")){
                     Intent i=new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(i);
+                    Toast.makeText(getApplicationContext(),"succes",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),progress[0],Toast.LENGTH_LONG).show();}
+                    Toast.makeText(getApplicationContext(),"votre user ou mot de passe errone ",Toast.LENGTH_LONG).show();}
 
             } catch (Exception ex) {
             }
