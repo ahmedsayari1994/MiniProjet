@@ -16,6 +16,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText ednom,edprenom,edmail,edlogin,edphone,edpass,edpassagain;
@@ -32,18 +34,25 @@ public class RegisterActivity extends AppCompatActivity {
         edpassagain=(EditText) findViewById(R.id.edpassagain);
     }
     public void inscrit(View view) {
-        String url="";
+        String url="",regEx,strEmailAddress;
+        regEx = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         String strPass1 = edpass.getText().toString();
         String strPass2 = edpassagain.getText().toString();
+        strEmailAddress = edmail.getText().toString().trim();
+        Matcher matcherObj = Pattern.compile(regEx).matcher(strEmailAddress);
+        if (matcherObj.matches()) {
         if (strPass1.equals(strPass2)) {
             url ="http://anproip.esy.es/inscript.php?nom="+ednom.getText().toString()+"&prenom="+edprenom.getText().toString()+
-                    "&login="+edlogin.getText().toString()+"&phone="+edphone.getText().toString()+"&password="+edpass.getText().toString();
+                    "&login="+edlogin.getText().toString()+"&phone="+edphone.getText().toString()+"&email="+edmail.getText().toString()+"&password="+edpass.getText().toString();
         //"http://anproip.esy.es/inscript.php?nom=tt&prenom=yy&login=t&phone=44&password=dd
 
           /* Intent i= new Intent(this,ProposerTrajet.class);
             startActivity(i);*/
         } else {
            Toast.makeText(getApplicationContext(),"passwords not equals",Toast.LENGTH_SHORT).show();
+        }}
+            else {
+            Toast.makeText(getApplicationContext(), strEmailAddress+" is InValid", Toast.LENGTH_SHORT).show();
         }
 
         new MyAsyncTaskgetNews().execute(url);
